@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState,MouseEvent } from 'react'
 
 import defaultImage from '../../../resources/images/defaultImageMoviePoster.png'
 import Loader from '../../loader/Loader';
@@ -7,7 +7,7 @@ import Header from './tools/Header';
 import Cast from './tools/Cast';
 
 type BigCardProps = {
-    close: () => void;
+    close: (e: MouseEvent<HTMLDivElement>) => void;
     poster: string;
     id: string;
     title: string;

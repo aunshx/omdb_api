@@ -150,7 +150,6 @@ const SearchBar = ({
     <>
       <div className='search'>
         <CssSearchField
-        //   style={width < 635 ? {width: '200px'} : {}}
           size='small'
           placeholder={width < 635 ? 'Search Movie' : 'Search Movie By Title'}
           fullWidth

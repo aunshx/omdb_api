@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, MouseEvent } from 'react'
 import { Box, Fade, Modal } from "@mui/material";
 import useWindow from 'react-window-size-simple';
 
@@ -49,13 +49,15 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   // Open Modal when clicked
-  const openModal = () => {
-    setIsModalOpen(true)
+  const openModal = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    setIsModalOpen(!isModalOpen)
   }
 
   // Close the modal 
-  const closeModal = () => {
-    setIsModalOpen(false)
+  const closeModal = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    setIsModalOpen(!isModalOpen)
   }
 
    const onLoad = () => {
@@ -63,10 +65,17 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
    };
 
   return (
-    <>
-      <div className='card cursor_pointer' onClick={openModal} data-aos={width < 786 ? '' : 'fade-up'} data-aos-offset={20} >
+    <div onClick={openModal}>
+      <div className='card cursor_pointer' data-aos={width < 786 ? '' : 'fade-up'} data-aos-offset={20} >
         <div
-          style={{
+          style={width < 786 ? {
+            display: isImageLoading ? "block" : "none",
+            width: "200px",
+            height: "150px",
+            marginBottom: "1em",
+            borderRadius: "10px 10px 0 0",
+            padding: '60px'
+          } : {
             display: isImageLoading ? "block" : "none",
             width: "250px",
             height: "200px",
@@ -116,7 +125,7 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
           </Box>
         </Fade>
       </Modal>
-    </>
+    </div>
   );
 }
 
