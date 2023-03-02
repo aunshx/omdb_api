@@ -52,10 +52,6 @@ const SearchBar = ({
     setError
 }: Props) => {
 
-const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-
-console.log(API_KEY)
-
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const { width } = useWindow()
@@ -69,13 +65,13 @@ console.log(API_KEY)
   };
 
   useEffect(() => {
-    let isOpen = true;
+    let isOpen: boolean = true;
 
     const fetchData = async () => {
       let validInput = input.trim()
       if(validInput.length > 0){
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=${API_KEY}&s=${validInput}&type=movie&page=1`
+          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=1`
         );
 
         const json = await data.json();
@@ -146,7 +142,7 @@ console.log(API_KEY)
       isOpen = false;
       clearInterval(getData);
     };
-  }, [input, setLoading]);
+  }, [error, input, setError, setLoading, setMovies, setPage]);
 
 
   return (

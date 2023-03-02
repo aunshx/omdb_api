@@ -398,3 +398,9 @@ body {
   font-size: 1.2em;
 }
 }
+
+/* ----- LAZY LOADING ----- */
+.lazy_loading {
+  color: var(--grey-color);
+  margin: 1em 0;
+}

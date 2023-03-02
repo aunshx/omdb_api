@@ -31,11 +31,10 @@ export type ErrorProps = {message: string; type: string;}
 
 const App: FC = () => {
 
-  const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-
   const[input, setInput] = useState<string>("")
   const[movies, setMovies] = useState<MovieData[]>([])
   const[loading, setLoading] = useState<boolean>(false)
+  const[lazyLoading, setLazyLoading] = useState<boolean>(false)
   const[error, setError] = useState<ErrorProps>({
     message: '',
     type: 'error'
@@ -58,8 +57,10 @@ const App: FC = () => {
       if (entries[0].isIntersecting) {
         setRefChange(true);
         setPage(page => page + 1)
+        setLazyLoading(true)
       } else {
         setRefChange(false);
+        setLazyLoading(false)
       }
     }, options);
     if (node) {
@@ -74,7 +75,7 @@ const App: FC = () => {
       let validInput = input.trim()
       try {
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=${API_KEY}&s=${validInput}&type=movie&page=${page}`
+          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=${page}`
         );
 
         const json = await data.json();
@@ -84,8 +85,10 @@ const App: FC = () => {
           setMovies([...movies, ...json.Search]);
         } 
         }
+        setLazyLoading(false)
       } catch (error) {
         setMovies([]);
+        setLazyLoading(false)
         console.log(error)
       }
     }
@@ -100,7 +103,7 @@ const App: FC = () => {
       isOpen = false
       clearInterval(getData)
     }
-  }, [refChange]);
+  }, [input, movies, page, refChange]);
   
 
   return (
@@ -128,10 +131,11 @@ const App: FC = () => {
             ) : (
               <>
                 {movies.length > 0 ? (
-                  <div className='container'>
+                  <>
+                    <div className='container'>
                     {movies.map((element, index) => (
                       <div key={element.imdbID}>
-                        {index % 7 === 0 ? (
+                        {index % 9 === 0 ? (
                           <div className='movie flex_middle' ref={refElement} >
                             <MovieCard
                               poster={element.Poster}
@@ -153,6 +157,10 @@ const App: FC = () => {
                       </div>
                     ))}
                   </div>
+                  {lazyLoading && <div className="lazy_loading" >
+                    Loading...
+                  </div>}
+                  </>
                 ) : (
                   <Empty />
                 )}
