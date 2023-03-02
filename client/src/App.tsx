@@ -70,9 +70,10 @@ const App: FC = () => {
 
     const fetchData = async () => {
       let validInput = input.trim()
+      // e76becda
       try {
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=e76becda&s=${validInput}&type=movie&page=${page}`
+          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=${page}`
         );
 
         const json = await data.json();

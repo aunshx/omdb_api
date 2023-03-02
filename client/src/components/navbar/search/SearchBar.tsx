@@ -71,7 +71,7 @@ const SearchBar = ({
       let validInput = input.trim()
       if(validInput.length > 0){
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=e76becda&s=${validInput}&type=movie&page=1`
+          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=1`
         );
 
         const json = await data.json();
