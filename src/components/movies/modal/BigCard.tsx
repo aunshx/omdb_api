@@ -83,7 +83,7 @@ const BigCard = ({ title, id, poster, year, close
         
         try {
           const getData = await fetch(
-            `http://www.omdbapi.com/?apikey=e76becda&i=${id}`
+            `https://www.omdbapi.com/?apikey=e76becda&i=${id}`
           );
 
           const json = await getData.json()

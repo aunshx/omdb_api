@@ -75,7 +75,7 @@ const App: FC = () => {
       let validInput = input.trim()
       try {
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=${page}`
+          `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=${page}`
         );
 
         const json = await data.json();
@@ -103,7 +103,8 @@ const App: FC = () => {
       isOpen = false
       clearInterval(getData)
     }
-  }, [input, movies, page, refChange]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refChange]);
   
 
   return (
