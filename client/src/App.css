@@ -149,3 +149,43 @@ body {
   border-radius: 5px;
   color: rgb(235, 119, 119);
 }
+
+/* ----------- MOVIE CARD ----------- */
+.movie {
+    margin: 2em 1em;
+}
+.movie .card {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 250px;
+  min-height: 300px;
+  border-radius: 10px;
+  background-color: var(--card-color);
+    color: var(--dark-font-color);
+}
+
+.movie .card:hover {
+  transform: scale(1.02);
+  transition: 0.3s ease-in-out;
+  color: var(--light-red-color);
+  box-shadow: rgba(240, 141, 138, 0.2) 0px 8px 24px;
+}
+
+.movie .card img {
+  object-fit: cover;
+  width: 250px;
+  height: 200px;
+  margin-bottom: 1em;
+  border-radius: 10px 10px 0 0;
+}
+
+.movie .card .title {
+  font-size: 1em;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.movie .card .year {
+  font-size: 0.8em;
+  color: var(--grey-color);
+  padding-bottom: 1em;
+}
