@@ -1,5 +1,3 @@
-import React from "react";
-
 import TranslateIcon from "@mui/icons-material/Translate";
 import FlagIcon from "@mui/icons-material/Flag";
 
@@ -17,7 +15,7 @@ const Header = ({ poster, defaultImage, title, year, language, country }: Header
     <>
       <div className='header'>
         <div className='image flex_left'>
-          <img src={poster || defaultImage} alt='' />
+          <img src={poster === "N/A" ? defaultImage : poster} alt='' />
         </div>
         <div className='flex_middle'>
           <div className='title flex_column'>

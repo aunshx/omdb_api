@@ -21,9 +21,18 @@ const style = {
   border: "none",
   outline: "none",
   padding: "1em",
-  // width: "70%",
-  // height: "60%",
 };
+
+const styleSmall = {
+ position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  boxShadow: 24,
+  border: "none",
+  outline: "none",
+  padding: "1em",
+}
 
 const MovieCard = ({ poster, title, year, id }: Movie) => {
 
@@ -96,7 +105,7 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
         }}
       >
         <Fade in={isModalOpen}>
-          <Box sx={style}>
+          <Box sx={width < 600 ? styleSmall : style}>
             <BigCard
               close={closeModal}
               poster={poster}

@@ -15,6 +15,7 @@
   --grey-color: grey;
   --card-color: rgb(253, 253, 253);
   --light-red-color: rgb(222, 147, 147);
+  --red-color: rgb(255,0,0);
 }
 
 
@@ -164,7 +165,7 @@ body {
 /* ------- ERRORS ------- */
 .errors {
   color: var(--grey-color);
-  border: 1px solid red;
+  border: 1px solid var(--red-color);
   padding: 10px;
   border-radius: 5px;
   color: rgb(235, 119, 119);
@@ -248,6 +249,8 @@ body {
   min-height: 400px;
   border-radius: 10px;
   padding: 1em;
+    overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Header */
@@ -309,8 +312,89 @@ body {
   border-bottom: 1px solid rgb(242, 240, 240);
 }
 
+@media only screen and (max-width: 600px){
+  .big-card {
+  background-color: var(--card-color);
+  color: var(--dark-font-color);
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 1em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Header */
+.big-card .header {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100px;
+}
+
+.big-card .header img {
+  object-fit: cover;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.big-card .header .title {
+  font-size: 0.85em;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.big-card .header .title .year {
+  font-size: 0.65em;
+  margin: 0.5em 0 0 0;
+}
+
+.big-card .header .title .details{
+  font-size: 0.55em;
+  text-align: center;
+  margin: 1em 0 0 0 ;
+}
+
+
+/* Description */
+.big-card .description {
+  font-size: 0.65em;
+  min-height: 50px;
+  margin: 4em 0.4em 1em 0.4em;
+  text-align: center;
+}
+
+
+/* Meta */
+.big-card .meta {
+  font-size: 0.55em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.big-card .meta .element {
+  margin: 0 0.5em;
+  text-align: center;
+}
+
+/* Cast */
+.big-card .cast{
+  font-size: 0.65em;
+  margin: 1em 0 2em 0;
+  padding: 1em;
+  border-top: 1px solid rgb(242, 240, 240);
+  border-bottom: 1px solid rgb(242, 240, 240);
+  text-align: center;
+}
+}
+
 /* ----- EMPTY --------- */
 .empty {
   color: var(--dark-font-color);
   font-size: 1.6em;
+}
+
+@media only screen and (max-width: 500px){
+  .empty {
+  font-size: 1.2em;
+}
 }
