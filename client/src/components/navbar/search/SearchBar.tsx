@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Loader from "../../loader/Loader";
 
+import { Props } from "../Navbar";
 
 const CssSearchField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -36,22 +37,21 @@ const CssSearchField = styled(TextField, {
   },
 }));
 
-type Props = {
-    input: string;
-    setInput: (val: string) => void; 
-    loading: boolean;
-    setLoading: (val: boolean) => void;
-}
 
 type InputEvent = ChangeEvent<HTMLInputElement>;
 type MouseEventHandle = MouseEvent<HTMLDivElement>;
 
-const SearchBar: React.FC<Props> = ({
+const SearchBar = ({
     input, 
     setInput, 
     loading, 
-    setLoading
-}) => {
+    setLoading,
+    movies,
+    setMovies,
+    setPage,
+    error,
+    setError
+}: Props) => {
 
   const [isSelected, setIsSelected] = useState<boolean>(false);
   
@@ -62,6 +62,87 @@ const SearchBar: React.FC<Props> = ({
   const changeDeselected = (e: MouseEventHandle) => {
     setIsSelected(false);
   };
+
+  useEffect(() => {
+    let isOpen = true;
+
+    const fetchData = async () => {
+      let validInput = input.trim()
+      if(validInput.length > 0){
+        const data = await fetch(
+          `http://www.omdbapi.com/?apikey=e76becda&s=${validInput}&type=movie&page=1`
+        );
+
+        const json = await data.json();
+
+        setLoading(false);
+
+        if (json.Response === "False") {
+          setMovies([]);
+          setPage(1)
+          setError({
+            ...error,
+            message: json.Error,
+          });
+
+          setTimeout(
+            () =>
+              setError({
+                ...error,
+                message: "",
+              }),
+            2500
+          );
+        } else {
+          if (isOpen) {
+              console.log(json.Search)
+              setMovies(json.Search);
+          }
+        }
+      } else {
+         setMovies([]);
+          setLoading(false);
+          setPage(1)
+         setError({
+           ...error,
+           message: 'Please type valid movie name',
+         });
+
+         setTimeout(
+           () =>
+             setError({
+               ...error,
+               message: "",
+             }),
+           2500
+         );
+      }
+
+    };
+
+    if (input !== "") setLoading(true);
+
+    // Send API request only after 1 second each
+    const getData = setTimeout(() => {
+      try {
+        if(input !== '') {
+          fetchData();
+        } else {
+          setMovies([]);
+          setLoading(false)
+        }
+      } catch (e) {
+        setLoading(false);
+        return e;
+      }
+    }, 1000);
+
+    // clean up the interval also isOpen to false to prevent race condition
+    return () => {
+      isOpen = false;
+      clearInterval(getData);
+    };
+  }, [input, setLoading]);
 
 
   return (

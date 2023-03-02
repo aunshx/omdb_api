@@ -2,19 +2,37 @@ import React from "react";
 
 import SearchBar from './search/SearchBar'
 
-type Props = {
+import { Movie } from "../../App";
+
+export type Props = {
     input: string;
     setInput: (val: string) => void; 
     loading: boolean;
     setLoading: (val: boolean) => void;
+    error: {
+        message: string;
+        type: string;
+    };
+    setError: (val: {
+        message: string;
+        type: string;
+    }) => void;
+    movies: Movie[];
+    setMovies: (movies: Movie[]) => void;
+    setPage: (val: number) => void
 }
 
-const Navbar: React.FC<Props> = ({
+const Navbar = ({
     input, 
     setInput, 
     loading, 
-    setLoading
-}) => {
+    setLoading,
+    error,
+    setError,
+    movies,
+    setMovies,
+    setPage
+}: Props) => {
   return (
     <>
       <div className='navbar flex_between'>
@@ -32,6 +50,11 @@ const Navbar: React.FC<Props> = ({
                 setInput={setInput}
                 loading={loading}
                 setLoading={setLoading}
+                movies={movies}
+                setMovies={setMovies}
+                error={error}
+                setError={setError}
+                setPage={setPage}
             />
           </div>
         </div>
