@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Fade, Modal } from "@mui/material";
+import useWindow from 'react-window-size-simple';
 
 // Importing components 
 import BigCard from "./modal/BigCard";
@@ -25,6 +26,8 @@ const style = {
 };
 
 const MovieCard = ({ poster, title, year, id }: Movie) => {
+
+ const { width } = useWindow()
 
   // Image loading for poster 
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true)
@@ -52,7 +55,7 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
 
   return (
     <>
-      <div className='card cursor_pointer' onClick={openModal} data-aos={'fade-up'} data-aos-offset={20} >
+      <div className='card cursor_pointer' onClick={openModal} data-aos={width < 786 ? '' : 'fade-up'} data-aos-offset={20} >
         <div
           style={{
             display: isImageLoading ? "block" : "none",

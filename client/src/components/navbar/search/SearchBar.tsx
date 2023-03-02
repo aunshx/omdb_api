@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState, MouseEvent, useEffect } from "react";
+import { ChangeEvent, useState, MouseEvent, useEffect } from "react";
+import useWindow from 'react-window-size-simple'
 
 import { InputAdornment, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -52,6 +53,8 @@ const SearchBar = ({
 }: Props) => {
 
   const [isSelected, setIsSelected] = useState<boolean>(false);
+
+  const { width } = useWindow()
   
   const changeSelected = (e: MouseEventHandle) => {
     setIsSelected(true);
@@ -146,10 +149,10 @@ const SearchBar = ({
     <>
       <div className='search'>
         <CssSearchField
+        //   style={width < 635 ? {width: '200px'} : {}}
           size='small'
-          placeholder='Search Movie By Title'
+          placeholder={width < 635 ? 'Search Movie' : 'Search Movie By Title'}
           fullWidth
-          className='search_bar'
           onChange={(e: InputEvent) => setInput(e.target.value)}
           onMouseEnter={changeSelected}
           onMouseLeave={changeDeselected}

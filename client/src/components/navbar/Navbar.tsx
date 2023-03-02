@@ -1,4 +1,4 @@
-import React from "react";
+import useWindow from 'react-window-size-simple'
 
 import SearchBar from './search/SearchBar'
 
@@ -33,6 +33,8 @@ const Navbar = ({
     setMovies,
     setPage
 }: Props) => {
+const {width} = useWindow()
+
   return (
     <>
       <div className='navbar flex_between'>
@@ -58,7 +60,7 @@ const Navbar = ({
             />
           </div>
         </div>
-        <div className='flex_right cursor_pointer'>
+        {width > 700 && <div className='flex_right cursor_pointer'>
           <a
             href='https://omdbapi.com'
             target={"_blank"}
@@ -67,7 +69,7 @@ const Navbar = ({
           >
             More
           </a>
-        </div>
+        </div>}
       </div>
     </>
   );
