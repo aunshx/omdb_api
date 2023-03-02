@@ -52,6 +52,10 @@ const SearchBar = ({
     setError
 }: Props) => {
 
+const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
+
+console.log(API_KEY)
+
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   const { width } = useWindow()
@@ -71,7 +75,7 @@ const SearchBar = ({
       let validInput = input.trim()
       if(validInput.length > 0){
         const data = await fetch(
-          `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&s=${validInput}&type=movie&page=1`
+          `http://www.omdbapi.com/?apikey=${API_KEY}&s=${validInput}&type=movie&page=1`
         );
 
         const json = await data.json();

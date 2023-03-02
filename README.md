@@ -1,1 +1,1 @@
-# omdb_api
+# OMDb API Project
