@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Tooltip, Zoom, Box, Fade, Modal } from "@mui/material";
+import { useEffect, useState } from 'react'
+import { Box, Fade, Modal } from "@mui/material";
 
 // Importing components 
-// import BigCard from "./modal/BigCard";
+import BigCard from "./modal/BigCard";
 
 // Importing images
 import defaultImage from '../../resources/images/defaultImageMoviePoster.png'
@@ -52,7 +52,7 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
 
   return (
     <>
-      <div className='card cursor_pointer' onClick={openModal}>
+      <div className='card cursor_pointer' onClick={openModal} data-aos={'fade-up'} data-aos-offset={20} >
         <div
           style={{
             display: isImageLoading ? "block" : "none",
@@ -94,13 +94,13 @@ const MovieCard = ({ poster, title, year, id }: Movie) => {
       >
         <Fade in={isModalOpen}>
           <Box sx={style}>
-            {/* <BigCard
+            <BigCard
               close={closeModal}
               poster={poster}
               id={id}
               title={title}
               year={year}
-            /> */}
+            />
           </Box>
         </Fade>
       </Modal>

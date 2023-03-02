@@ -189,3 +189,78 @@ body {
   color: var(--grey-color);
   padding-bottom: 1em;
 }
+
+/* ------- BIG CARD ------- */
+.big-card {
+  background-color: var(--card-color);
+  color: var(--dark-font-color);
+  width: 500px;
+  min-height: 400px;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+/* Header */
+.big-card .header {
+  display: grid;
+  grid-template-columns: 1.3fr 2fr;
+  height: 150px;
+}
+
+.big-card .header img {
+  object-fit: cover;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.big-card .header .title {
+  font-size: 1em;
+  text-align: center;
+}
+
+.big-card .header .title .year {
+  font-size: 0.8em;
+  margin: 0.5em 0 0 0;
+}
+
+.big-card .header .title .details{
+  font-size: 0.6em;
+  text-align: center;
+  margin: 1em 0 0 0 ;
+}
+
+
+/* Description */
+.big-card .description {
+  font-size: 0.8em;
+  min-height: 50px;
+  margin: 2em 0.4em 1em 0.4em;
+  text-align: center;
+}
+
+
+/* Meta */
+.big-card .meta {
+  font-size: 0.7em;
+  margin-bottom: 2em;
+}
+
+.big-card .meta .element {
+  margin: 0 0.5em;
+  text-align: center;
+}
+
+/* Cast */
+.big-card .cast{
+  font-size: 0.75em;
+  margin: 1em 0 2em 0;
+  padding: 1em;
+  border-top: 1px solid rgb(242, 240, 240);
+  border-bottom: 1px solid rgb(242, 240, 240);
+}
+
+/* ----- EMPTY --------- */
+.empty {
+  color: var(--dark-font-color);
+  font-size: 1.6em;
+}

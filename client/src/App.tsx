@@ -66,7 +66,7 @@ const App: FC = () => {
   }, []);
 
   useEffect(() => {
-    let isOpen = true 
+    let isOpen: boolean = true 
 
     const fetchData = async () => {
       let validInput = input.trim()
