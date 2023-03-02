@@ -171,6 +171,8 @@ const SearchBar = ({
                           }}
                           onClick={() => {
                             setInput("");
+                            setPage(1);
+                            setMovies([]);
                             setLoading(false);
                           }}
                         />

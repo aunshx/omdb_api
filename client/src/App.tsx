@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 import { useState, FC } from 'react'
 import "./App.css";
 
@@ -24,6 +27,8 @@ export type MovieData = {
 
 export type ErrorProps = {message: string; type: string;}
 
+
+
 const App: FC = () => {
 
   const[input, setInput] = useState<string>("")
@@ -35,7 +40,65 @@ const App: FC = () => {
   })
   const { message, type } = error
   const[page, setPage] = useState<number>(1);
+  const [refChange, setRefChange] = useState<boolean>(false);
 
+  const checker = useRef<IntersectionObserver | null>(null);
+
+  const refElement = useCallback((node: HTMLDivElement) => {
+    if (checker.current) {
+      checker.current.disconnect();
+    }
+    const options = {
+      root: null,
+      threshold: 0,
+    };
+    checker.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setRefChange(true);
+        setPage(page => page + 1)
+      } else {
+        setRefChange(false);
+      }
+    }, options);
+    if (node) {
+      checker.current.observe(node);
+    }
+  }, []);
+
+  useEffect(() => {
+    let isOpen = true 
+
+    const fetchData = async () => {
+      let validInput = input.trim()
+      try {
+        const data = await fetch(
+          `http://www.omdbapi.com/?apikey=e76becda&s=${validInput}&type=movie&page=${page}`
+        );
+
+        const json = await data.json();
+
+        if(json.Search){
+          if (isOpen) {
+          setMovies([...movies, ...json.Search]);
+        } 
+        }
+      } catch (error) {
+        setMovies([]);
+        console.log(error)
+      }
+    }
+
+      const getData = setTimeout(() => {
+        if(refChange){
+          fetchData();
+        }
+      }, 1000);
+
+    return () => {
+      isOpen = false
+      clearInterval(getData)
+    }
+  }, [refChange]);
   
 
   return (
@@ -67,7 +130,7 @@ const App: FC = () => {
                     {movies.map((element, index) => (
                       <div key={element.imdbID}>
                         {index % 7 === 0 ? (
-                          <div className='movie flex_middle'>
+                          <div className='movie flex_middle' ref={refElement} >
                             <MovieCard
                               poster={element.Poster}
                               title={element.Title}
