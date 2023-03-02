@@ -2,7 +2,7 @@ import React from "react";
 
 import SearchBar from './search/SearchBar'
 
-import { Movie } from "../../App";
+import { MovieData } from "../../App";
 
 export type Props = {
     input: string;
@@ -17,8 +17,8 @@ export type Props = {
         message: string;
         type: string;
     }) => void;
-    movies: Movie[];
-    setMovies: (movies: Movie[]) => void;
+    movies: MovieData[];
+    setMovies: (movies: MovieData[]) => void;
     setPage: (val: number) => void
 }
 

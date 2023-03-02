@@ -1,7 +1,10 @@
 import { useState, FC } from 'react'
 import "./App.css";
+
+import Empty from './components/empty/Empty';
 import Errors from './components/errors/Errors';
 import Loader from './components/loader/Loader';
+import MovieCard from './components/movies/MovieCard';
 
 import Navbar from "./components/navbar/Navbar";
 
@@ -12,12 +15,19 @@ export type Movie = {
   title: string;
 }
 
+export type MovieData = {
+  imdbID: string;
+  Poster: string;
+  Title: string;
+  Year: string;
+}
+
 export type ErrorProps = {message: string; type: string;}
 
 const App: FC = () => {
 
   const[input, setInput] = useState<string>("")
-  const[movies, setMovies] = useState<Movie[]>([])
+  const[movies, setMovies] = useState<MovieData[]>([])
   const[loading, setLoading] = useState<boolean>(false)
   const[error, setError] = useState<ErrorProps>({
     message: '',
@@ -25,6 +35,8 @@ const App: FC = () => {
   })
   const { message, type } = error
   const[page, setPage] = useState<number>(1);
+
+  
 
   return (
     <>
@@ -50,7 +62,35 @@ const App: FC = () => {
               <Errors message={message} type={type} />
             ) : (
               <>
-                Movies Array
+                {movies.length > 0 ? (
+                  <div className='container'>
+                    {movies.map((element, index) => (
+                      <div key={element.imdbID}>
+                        {index % 7 === 0 ? (
+                          <div className='movie flex_middle'>
+                            <MovieCard
+                              poster={element.Poster}
+                              title={element.Title}
+                              year={element.Year}
+                              id={element.imdbID}
+                            />
+                          </div>
+                        ) : (
+                          <div className='movie flex_middle'>
+                            <MovieCard
+                              poster={element.Poster}
+                              title={element.Title}
+                              year={element.Year}
+                              id={element.imdbID}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <Empty />
+                )}
               </>
             )}
           </>
