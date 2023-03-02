@@ -120,7 +120,7 @@ const BigCard = ({ title, id, poster, year, close
         isOpen = false
       }
 
-    }, [])
+    }, [data, id])
 
 
   return (
