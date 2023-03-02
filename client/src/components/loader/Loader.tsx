@@ -6,7 +6,7 @@ type Props = {
     thickness: number;
 }
 
-const Loader: React.FC<Props> = ({ size, thickness }) => {
+const Loader = ({ size, thickness }: Props) => {
   return (
     <CircularProgress
       variant='indeterminate'

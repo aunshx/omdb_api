@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useState, MouseEvent, useEffect } from "react";
 
-import PropTypes from "prop-types";
-
 import { InputAdornment, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -95,7 +93,6 @@ const SearchBar = ({
           );
         } else {
           if (isOpen) {
-              console.log(json.Search)
               setMovies(json.Search);
           }
         }
@@ -203,9 +200,6 @@ const SearchBar = ({
       </div>
     </>
   );
-};
-
-SearchBar.propTypes = {
 };
 
 export default SearchBar
