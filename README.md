@@ -4,7 +4,7 @@
 
 The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are contributed and maintained by users. Check it out [here](http://omdbapi.com).
 
-#### Check out the app [here](https://main--calm-cajeta-d1c26b.netlify.app/)
+#### Check out the app [here](https://calm-cajeta-d1c26b.netlify.app/)
 
 ## Features
 
