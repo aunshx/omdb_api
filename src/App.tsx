@@ -25,6 +25,8 @@ export type MovieData = {
   Year: string;
 }
 
+// Some basic change to check if the auth key is working on circleci
+
 export type ErrorProps = {message: string; type: string;}
 
 
