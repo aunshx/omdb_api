@@ -11,6 +11,8 @@ import MovieCard from './components/movies/MovieCard';
 
 import Navbar from "./components/navbar/Navbar";
 
+// Checking deploy for github workflows
+
 export type Movie = {
   id: string;
   poster: string;
