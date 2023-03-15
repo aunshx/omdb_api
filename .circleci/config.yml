@@ -25,9 +25,13 @@ jobs:
           key: app-build-cache-{{ .Branch }}
           paths:
             - ./build
-      - run:
-          name: Deploy to Netlify
-          command: ./node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
+      - run: sudo apt-get update && sudo apt-get install -y python-dev
+      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
+      - run: sudo python get-pip.py
+      - run: sudo pip install awscli --upgrade
+      - run: aws --version
+      - run: aws s3 ls
+      - run: npm run deploy
 workflows:
   version: 2
   build-deploy:
